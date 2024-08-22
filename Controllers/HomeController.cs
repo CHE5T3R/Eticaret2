@@ -49,7 +49,7 @@ namespace Eticaret.Controllers
                     CategoryId = i.CategoryId
                 }).AsQueryable();
             if (id != null)
-            { 
+            {
                 items = items.Where(i=>i.CategoryId == id);
             }
 
