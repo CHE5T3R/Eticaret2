@@ -2,6 +2,7 @@
 
 @{
     ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
 <div class="container pb-5">
@@ -10,7 +11,7 @@
     <hr />
     <h5>Silmek istediğinize emin misiniz?</h5>
     <div>
-
+        <hr />
         <dl class="dl-horizontal">
             <dt>
                 @Html.DisplayNameFor(model => model.Name)
@@ -35,7 +36,7 @@
             @Html.AntiForgeryToken()
 
             <div class="form-actions no-color">
-                <input type="submit" value="Sil" class="btn btn-danger" /> 
+                <input type="submit" value="Sil" class="btn btn-danger" />
                 @Html.ActionLink("Listeye Dön", "Index", null, new { @class = "btn btn-primary" })
             </div>
         }
