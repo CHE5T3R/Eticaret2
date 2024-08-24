@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
-namespace Eticaret.Models.Entities
+namespace Eticaret.Entities
 {
     public class Product
     {
@@ -29,8 +29,6 @@ namespace Eticaret.Models.Entities
         [DisplayName("Onaylı mı")]
         [Required]
         public bool IsApproved { get; set; }
-
-        [Required]
 
         public int CategoryId { get; set; }
         public Category Category { get; set; }

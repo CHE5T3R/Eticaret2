@@ -6,7 +6,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace Eticaret.Models.Entities
+namespace Eticaret.Entities
 {
     public class Category
     {

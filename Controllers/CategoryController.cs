@@ -6,8 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using Eticaret.Models.Context;
-using Eticaret.Models.Entities;
+using Eticaret.Entities;
 
 namespace Eticaret2.Controllers
 {

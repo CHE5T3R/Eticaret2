@@ -1,5 +1,5 @@
-﻿using Eticaret.Models.Context;
-using Eticaret.Models.ViewModel;
+﻿using Eticaret.Entities;
+using Eticaret.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
