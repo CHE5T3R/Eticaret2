@@ -1,4 +1,5 @@
-﻿using Eticaret2.Identity;
+﻿using Eticaret.Entities;
+using Eticaret2.Identity;
 using Eticaret2.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
@@ -12,6 +13,7 @@ namespace Eticaret2.Controllers
 {
     public class AccountController : Controller
     {
+        private DataContext db = new DataContext();
         private UserManager<ApplicationUser> UserManager;
         private RoleManager<ApplicationRole> RoleManager;
 
@@ -24,6 +26,25 @@ namespace Eticaret2.Controllers
             RoleManager = new RoleManager<ApplicationRole>(roleStore);
 
         }
+        [Authorize]
+        public ActionResult Index()
+        {
+            var username = User.Identity.Name;
+            var orders = db.Orders
+                .Where(i=>i.UserName == username)
+                .Select(i=>new UserOrderModel()
+                {
+                    Id = i.Id,
+                    OrderNumber = i.OrderNumber,
+                    OrderDate = i.OrderDate,
+                    Total = i.Total,
+                    OrderState = i.OrderState
+                }).OrderByDescending(i=>i.OrderDate).ToList();
+
+
+            return View(orders);
+        }
+
 
         // GET: Register
         public ActionResult Register()
@@ -114,6 +135,36 @@ namespace Eticaret2.Controllers
             authManager.SignOut();
 
             return RedirectToAction("Index", "Home");
+        }
+        [Authorize]
+
+        public ActionResult Details(int id)
+        {
+            var model = db.Orders.Where(i => i.Id == id)
+                .Select(i=> new OrderDetailsModel()
+                {
+                    OrderId = i.Id,
+                    OrderNumber = i.OrderNumber,
+                    Total = i.Total,
+                    OrderDate = i.OrderDate,
+                    OrderState = i.OrderState,
+                    AdresBasligi = i.AdresBasligi,
+                    Adres = i.Adres,
+                    Sehir = i.Sehir,
+                    Semt = i.Semt,
+                    Mahalle = i.Mahalle,
+                    PostaKodu = i.PostaKodu,
+                    OrderLines = i.OrderLines.Select(x => new OrderLineModel()
+                    {
+                        ProductId = x.ProductId,
+                        ProductName = x.Product.Name,
+                        Image = x.Product.Image,
+                        Quantity = x.Quantity,
+                        Price = x.Price
+                    }).ToList()
+
+                }).FirstOrDefault();
+            return View(model);
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Eticaret.Entities;
+using Eticaret2.Entities;
 using Eticaret2.Models;
 using System;
 using System.Collections.Generic;
@@ -79,6 +80,7 @@ namespace Eticaret2.Controllers
                 {
                     //Siparişi veritabanına kaydet
                     //cart ı sıfırla
+                    SaveOrder(cart, shippingdetails);
                     cart.Clear();
                     return View("Completed");
                 }
@@ -90,6 +92,37 @@ namespace Eticaret2.Controllers
             
 
             return View();
+        }
+
+        private void SaveOrder(Cart cart, ShippingDetails shippingdetails)
+        {
+            var order = new Order();
+            order.OrderNumber = "A"+(new Random()).Next(111111, 999999).ToString();
+            order.Total = cart.Total();
+            order.OrderDate = DateTime.Now;
+            order.OrderState = EnumOrderState.Waiting;
+
+            order.UserName = User.Identity.Name;
+            order.AdresBasligi = shippingdetails.AdresBasligi;
+            order.Adres = shippingdetails.Adres;
+            order.Sehir = shippingdetails.Sehir;
+            order.Semt = shippingdetails.Semt;
+            order.Mahalle = shippingdetails.Mahalle;
+            order.PostaKodu = shippingdetails.PostaKodu;
+
+            order.OrderLines = new List<OrderLine>();
+
+            foreach (var item in cart.Cartlines)
+            {
+                var orderline = new OrderLine();
+                orderline.Quantity = item.Quantity;
+                orderline.Price = item.Product.Price * item.Quantity;
+                orderline.ProductId = item.Product.Id;
+
+                order.OrderLines.Add(orderline);
+            }
+            db.Orders.Add(order);
+            db.SaveChanges();
         }
     }
 }

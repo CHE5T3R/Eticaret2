@@ -1,19 +1,19 @@
 ﻿using Eticaret.Entities;
+using Eticaret2.Entities;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
-namespace Eticaret2.Entities
+namespace Eticaret2.Models
 {
-    public class Order
+    public class OrderDetailsModel
     {
-        public int Id { get; set; }
+        public int OrderId { get; set; }
         public string OrderNumber { get; set; }
         public double Total { get; set; }
         public DateTime OrderDate { get; set; }
-        public EnumOrderState OrderState {  get; set; }
+        public EnumOrderState OrderState { get; set; }
 
         public string UserName { get; set; }
         public string AdresBasligi { get; set; }
@@ -23,17 +23,15 @@ namespace Eticaret2.Entities
         public string Mahalle { get; set; }
         public string PostaKodu { get; set; }
 
-        public  virtual List<OrderLine> OrderLines { get; set; }
-
+        public virtual List<OrderLineModel> OrderLines { get; set; }
     }
-    public class OrderLine
+    public class OrderLineModel
     {
-        public int Id { get; set; }
-        public int OrderId { get; set; }
-        public virtual Order Order { get; set; }
+        public int ProductId { get; set; }
+        public string ProductName { get; set; }
+        public string Image { get; set; }
         public int Quantity { get; set; }
         public double Price { get; set; }
-        public int ProductId { get; set; }
-        public virtual Product Product { get; set; }
+
     }
 }

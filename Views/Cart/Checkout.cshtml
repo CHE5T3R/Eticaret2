@@ -16,8 +16,8 @@
             {
                 @Html.ValidationSummary()
                 <div class="form-group col-md-6">
-                    <label>Ad Soyad</label>
-                    @Html.TextBoxFor(x => x.UserName, new { @class = "form-control" })
+                    <label>Kullanıcı Adı :</label>
+                    <span style="color:blue;font-weight:bold;font-style:italic">@User.Identity.Name</span>
                 </div>
                 <div class="form-group col-md-6">
                     <label>Adres Başlığı</label>
