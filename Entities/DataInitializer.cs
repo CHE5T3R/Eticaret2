@@ -1,11 +1,11 @@
-﻿using Eticaret.Models.Entities;
+﻿using Eticaret.Entities;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Web;
 
-namespace Eticaret.Models.Context
+namespace Eticaret.Entities
 {
     public class DataInitializer : DropCreateDatabaseIfModelChanges<DataContext>
     {

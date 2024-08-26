@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
-namespace Eticaret.Models.Entities
+namespace Eticaret.Entities
 {
     public class Product
     {

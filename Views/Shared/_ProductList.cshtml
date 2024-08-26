@@ -1,4 +1,4 @@
-﻿@using Eticaret.Models.ViewModel;
+﻿@using Eticaret.Models;
 @model IEnumerable<ProductModel>
 
 <div class="row">
@@ -18,8 +18,7 @@
                 </div>
                 <div class="card-footer">
                     <small class="text-muted product-price">
-                        @item.Price
-                        <i class="fa fa-turkish-lira"></i>
+                        @item.Price.ToString("c")
                     </small>
                     <a href="/Home/Details/@item.Id" class="btn btn-default btn-sm float-right">
                         <i class="fa fa-angle-double-right" aria-hidden="true"></i>
