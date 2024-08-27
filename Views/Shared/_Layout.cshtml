@@ -4,13 +4,27 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    
+
     <script src="https://kit.fontawesome.com/ba3264bfbd.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="~/theme/css/style.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link rel="stylesheet" href="/theme/css/style.css">
+
     <title>Ne Vereyim Abime</title>
+    <style>
+        footer {
+            background-color: #f8f9fa;
+            color: #333;
+            text-align: Left;
+            width: 100%;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+        }
+
+
+    </style>
 </head>
 <body>
 
@@ -29,13 +43,12 @@
                     <li class="nav-item">
                         <a class="nav-link" href="/Home/List">Ürünler</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Hakkımızda</a>
-                    </li>
+
                 </ul>
+                @Html.Action("FavoritesIcon","Favorites")
                 @Html.Action("Summary", "Cart")
                 @Html.Partial("_LoginPartial")
-            </div>  
+            </div>
         </div>
     </nav>
 
@@ -44,11 +57,13 @@
 
 
 
-    <footer class="footer">
-        <div class="container">
-            <span class="text-muted">Place sticky footer content here.</span>
-        </div>
-    </footer>
+<footer class="footer">
+    <div class="container">
+        
+        <a href="/Home" style="color:#000000;">User Page</a> |
+        <a href="/Order" style="color:#000000;">Admin Page</a>
+    </div>
+</footer>
 
 
     <!-- Optional JavaScript -->

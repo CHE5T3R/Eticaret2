@@ -145,9 +145,14 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CartController.cs" />
     <Compile Include="Controllers\CategoryController.cs" />
+    <Compile Include="Controllers\FavoritesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\OrderController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
+    <Compile Include="Entities\Cart.cs" />
+    <Compile Include="Entities\Comment.cs" />
     <Compile Include="Entities\EnumOrderState.cs" />
+    <Compile Include="Entities\Favorite.cs" />
     <Compile Include="Entities\Order.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -160,6 +165,7 @@
     <Compile Include="Identity\ApplicationUser.cs" />
     <Compile Include="Identity\IdentityDataContext.cs" />
     <Compile Include="Identity\IdentityInitializer.cs" />
+    <Compile Include="Models\AdminOrderModel.cs" />
     <Compile Include="Models\Cart.cs" />
     <Compile Include="Models\Login.cs" />
     <Compile Include="Models\OrderDetailsModel.cs" />
@@ -199,6 +205,10 @@
     <Content Include="Views\Cart\Completed.cshtml" />
     <Content Include="Views\Account\Index.cshtml" />
     <Content Include="Views\Account\Details.cshtml" />
+    <Content Include="Views\Order\Index.cshtml" />
+    <Content Include="Views\Order\Details.cshtml" />
+    <Content Include="Views\Favorites\FavoritesIcon.cshtml" />
+    <Content Include="Views\Favorites\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

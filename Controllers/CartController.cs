@@ -13,7 +13,7 @@ namespace Eticaret2.Controllers
     public class CartController : Controller
     {
         private DataContext db = new DataContext();
-
+        [Authorize]
         // GET: Cart
         public ActionResult Index()
         {
@@ -22,7 +22,7 @@ namespace Eticaret2.Controllers
 
         public ActionResult AddToCart(int id)
         {
-            var product = db.Products.FirstOrDefault(i=>i.Id == id);
+            var product = db.Products.FirstOrDefault(i => i.Id == id);
 
             if (product != null)
             {
@@ -34,7 +34,7 @@ namespace Eticaret2.Controllers
 
         public ActionResult RemoveFromCart(int id)
         {
-            var product = db.Products.FirstOrDefault(i=>i.Id == id);
+            var product = db.Products.FirstOrDefault(i => i.Id == id);
 
             if (product != null)
             {
@@ -43,14 +43,14 @@ namespace Eticaret2.Controllers
 
             return RedirectToAction("Index");
         }
-        
-        public Cart GetCart()
+
+        public CartModel GetCart() // entity oluştur database den authorize a göre çek
         {
-            var cart = (Cart)Session["Cart"];
+            var cart = (CartModel)Session["Cart"];
 
             if (cart == null)
             {
-                cart = new Cart();
+                cart = new CartModel();
                 Session["Cart"] = cart;
             }
             return cart;
@@ -70,7 +70,7 @@ namespace Eticaret2.Controllers
         public ActionResult Checkout(ShippingDetails shippingdetails)
         {
             var cart = GetCart();
-            if(cart.Cartlines.Count==0)
+            if (cart.Cartlines.Count == 0)
             {
                 ModelState.AddModelError("", "Sepetinizde ürün bulunmamaktadır.");
             }
@@ -89,15 +89,15 @@ namespace Eticaret2.Controllers
                     return View(shippingdetails);
                 }
             }
-            
+
 
             return View();
         }
 
-        private void SaveOrder(Cart cart, ShippingDetails shippingdetails)
+        private void SaveOrder(CartModel cart, ShippingDetails shippingdetails)
         {
             var order = new Order();
-            order.OrderNumber = "A"+(new Random()).Next(111111, 999999).ToString();
+            order.OrderNumber = "A" + (new Random()).Next(111111, 999999).ToString();
             order.Total = cart.Total();
             order.OrderDate = DateTime.Now;
             order.OrderState = EnumOrderState.Waiting;

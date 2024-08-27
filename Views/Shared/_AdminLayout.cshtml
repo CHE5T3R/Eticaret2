@@ -23,17 +23,19 @@
             <div class="navbar-collapse collapse" id="navbarColor01" style="">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item active">
-                        <a class="nav-link" href="/Product">Ürün <span class="sr-only">(current)</span></a>
+                        <a class="nav-link" href="/Product">Ürünler <span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/Category">Kategori</a>
+                        <a class="nav-link" href="/Category">Kategoriler</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/Order">Siparişler</a>
                     </li>
                 </ul>
                 <form class="form-inline">
-                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-info my-2 my-sm-0" type="submit">Search</button>
+                    @Html.Partial("_LoginPartial")
                 </form>
-            </div>  
+            </div>
         </div>
     </nav>
 
@@ -44,7 +46,8 @@
 
     <footer class="footer">
         <div class="container">
-            <span class="text-muted">Place sticky footer content here.</span>
+            <a href="/Home" style="color:#000000;">User Page</a> |
+            <a href="/Order" style="color:#000000;">Admin Page</a>
         </div>
     </footer>
 

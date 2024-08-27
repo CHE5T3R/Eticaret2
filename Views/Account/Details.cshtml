@@ -1,4 +1,6 @@
-﻿@model Eticaret2.Models.OrderDetailsModel
+﻿@using Eticaret2.Entities
+@model Eticaret2.Models.OrderDetailsModel
+
 @{
     ViewBag.Title = "Details";
 }
@@ -12,7 +14,16 @@
 
             <dl class="row">
                 <dt class="col-sm-3">Order State</dt>
-                <dd class="col-sm-9">@Model.OrderState</dd>
+                <dd class="col-sm-9">
+                    @if (Model.OrderState == EnumOrderState.Waiting)
+                    {
+                        <span style="color:darkorange;font-weight:bold;">@Model.OrderState</span>
+                    }
+                    else if (Model.OrderState == EnumOrderState.Completed)                   
+                    {
+                        <span style="color:green;font-weight:bold;font-style:italic">@Model.OrderState</span>
+                    }
+                </dd>
                 <dt class="col-sm-3">Order Id</dt>
                 <dd class="col-sm-9">@Model.OrderId</dd>
                 <dt class="col-sm-3">Order Number</dt>

@@ -6,7 +6,7 @@ using System.Web;
 
 namespace Eticaret2.Models
 {
-    public class Cart
+    public class CartModel
     {
         private List<CartLine> _cartlines = new List<CartLine>();
         public List<CartLine> Cartlines
