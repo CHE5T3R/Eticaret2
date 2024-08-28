@@ -1,6 +1,8 @@
 ﻿using Eticaret.Entities;
 using Eticaret2.Entities;
+using Eticaret2.Identity;
 using Eticaret2.Models;
+using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,24 +11,34 @@ using System.Web.Mvc;
 
 namespace Eticaret2.Controllers
 {
-
+    [Authorize]
     public class CartController : Controller
     {
         private DataContext db = new DataContext();
-        [Authorize]
+
         // GET: Cart
         public ActionResult Index()
         {
-            return View(GetCart());
+            var carts = db.Carts.Where(i=>i.UserName == User.Identity.Name);
+
+            return View(carts.ToList());
         }
 
         public ActionResult AddToCart(int id)
         {
             var product = db.Products.FirstOrDefault(i => i.Id == id);
+            var cartline2 = db.CartLine2;
+            var carts = db.Carts.Where(i => i.UserName == User.Identity.Name);
+            //buradasın
+            
 
             if (product != null)
             {
-                GetCart().AddProduct(product, 1);
+                if (cartline2.Where(i=>i.ProductId == id)!=null && carts.Where(i=>i.UserName)
+                {
+                    cartline2
+                }
+
             }
 
             return RedirectToAction("Index");
@@ -46,7 +58,8 @@ namespace Eticaret2.Controllers
 
         public CartModel GetCart() // entity oluştur database den authorize a göre çek
         {
-            var cart = (CartModel)Session["Cart"];
+
+            var cart = db.Carts;
 
             if (cart == null)
             {

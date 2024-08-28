@@ -1,4 +1,4 @@
-﻿@model Eticaret2.Models.CartModel
+﻿@model IEnumerable<Eticaret2.Entities.Cart>
 @{
     ViewBag.Title = "Index";
 }
@@ -10,7 +10,7 @@
             <h2>Alışveriş Sepeti</h2>
             <hr />
 
-            @if (Model.Cartlines.Count > 0)
+            @if (true)
             {
                 <table class="table table-bordered">
                     <thead>
@@ -24,20 +24,20 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach (var item in Model.Cartlines)
+                        @foreach (var item in Model)
                         {
                             <tr>
                                 <td>
-                                    <img src="~/upload/@item.Product.Image" width="50" />
+                                    <img src="~/upload/@item.CartLine2.Product.Image" width="50" />
                                 </td>
-                                <td>@item.Quantity</td>
-                                <td>@item.Product.Name</td>
-                                <td>@item.Product.Price.ToString("c")</td>
-                                <td>@((item.Product.Price * item.Quantity).ToString("c"))</td>
+                                <td>@item.CartLine2.Quantity</td>
+                                <td>@item.CartLine2.Product.Name</td>
+                                <td>@item.CartLine2.Product.Price.ToString("c")</td>
+                                <td>@((item.CartLine2.Product.Price * item.CartLine2.Quantity).ToString("c"))</td>
                                 <td>
                                     @using (Html.BeginForm("RemoveFromCart", "Cart"))
                                     {
-                                        @Html.Hidden("Id", item.Product.Id)
+                                        @Html.Hidden("Id", item.CartLine2)
                                         <button type="submit" class="btn btn-danger">
                                             <i class="fa-solid fa-trash" aria-hidden="true"></i>
                                             Delete
@@ -51,7 +51,7 @@
                         <tr>
                             <td colspan="5"></td>
                             <td>
-                                @Model.Total().ToString("c")
+                                @(Model.Sum(i => i.CartLine2.Product.Price * i.CartLine2.Quantity))
                             </td>
                         </tr>
                     </tfoot>
