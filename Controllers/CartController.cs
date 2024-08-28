@@ -27,16 +27,22 @@ namespace Eticaret2.Controllers
         public ActionResult AddToCart(int id)
         {
             var product = db.Products.FirstOrDefault(i => i.Id == id);
-            var cartline2 = db.CartLine2;
             var carts = db.Carts.Where(i => i.UserName == User.Identity.Name);
             //buradasın
             
 
             if (product != null)
             {
-                if (cartline2.Where(i=>i.ProductId == id)!=null && carts.Where(i=>i.UserName)
+                if (carts.FirstOrDefault(i=>i.ProductId == id) != null)
                 {
-                    cartline2
+                    foreach(var dbCarts in carts)
+                    {
+                        dbCarts.Quantity += 1;
+                    }
+                }
+                else
+                {
+                    db.Carts.Add();
                 }
 
             }
