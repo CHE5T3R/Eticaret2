@@ -23,7 +23,7 @@
                     }
                     else
                     {<span class="badge badge-danger">Stock out</span>}
-                    <span class="product-number">#123456</span>
+                    <span class="product-number">#@Model.Id</span>
                 </div>
             </div>
             <div class="row mt-2">
@@ -42,7 +42,7 @@
                     <i class="fa fa-star-half-full" aria-hidden="true"></i>
                     <span class="badge badge-success">53</span>
                 </div>
-                <div id="write-rewiew" class="col-md-4">
+                <div id="write-rewiew" class="col-md-4 ml-1">
                     <a href="#">Write a rewiew</a>
                 </div>
             </div>
@@ -53,13 +53,22 @@
             </div>
             <div class="row mt-2">
                 <div class="col-md-12">
-                    @using (Html.BeginForm("AddToCart", "Cart"))
-                    {
-                        @Html.HiddenFor(i=>i.Id)
-                        <button type="submit" class="btn btn-success">
-                            <i class="fa fa-cart-plus"></i>Add To Cart
-                        </button>
-                     }
+                    <div class="row">
+                        @using (Html.BeginForm("AddToCart", "Cart"))
+                        {
+                            @Html.HiddenFor(i => i.Id)
+                            <button type="submit" class="btn btn-success">
+                                <i class="fa fa-cart-plus"></i>Sepete Ekle
+                            </button>
+                        }
+                        @using (Html.BeginForm("AddToFavorite", "Favorites"))
+                        {
+                            @Html.HiddenFor(i => i.Id)
+                            <button type="submit" class="btn btn-success ml-2">
+                                <i class="fa-solid fa-heart"></i>Favorilere Ekle
+                            </button>
+                        }
+                    </div>
                 </div>
             </div>
         </div>

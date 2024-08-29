@@ -5,13 +5,18 @@
     ViewBag.Title = "Details";
 }
 
-<div class="container">
+<div class="container pb-5">
     <div class="row">
         <div class="col-md-12">
-
-            <h2>Sipariş Detay Bilgileri</h2>
+            <div class="row">
+                <div class="col-md-11">
+                    <h2>Sipariş Detay Bilgileri</h2>
+                </div>
+                <div class="col-md-1">
+                    <button type="submit" class="btn btn-danger mr-1"><i class="fa-solid fa-trash-can"></i> İade Et</button>
+                </div>
+            </div>
             <hr />
-
             <dl class="row">
                 <dt class="col-sm-3">Order State</dt>
                 <dd class="col-sm-9">
@@ -19,7 +24,7 @@
                     {
                         <span style="color:darkorange;font-weight:bold;">@Model.OrderState</span>
                     }
-                    else if (Model.OrderState == EnumOrderState.Completed)                   
+                    else if (Model.OrderState == EnumOrderState.Completed)
                     {
                         <span style="color:green;font-weight:bold;font-style:italic">@Model.OrderState</span>
                     }
@@ -44,7 +49,7 @@
                 </dd>
                 <dt class="col-sm-3">Products</dt>
                 <dd class="col-sm-9">
-                    <table class="table table-bordered">
+                    <table class="table table-bordered table-striped">
                         <thead>
                             <tr>
                                 <th>Image</th>
@@ -65,10 +70,26 @@
                                     <td>@item.Quantity</td>
                                     <td>@item.Price.ToString("c")</td>
                                     <td>
-                                        <a href="/Home/Details/@item.ProductId" class="btn btn-primary" target="_blank">
-                                            <i class="fa-solid fa-circle-info"></i>
-                                            Product Details
-                                        </a>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="row">
+                                                    @using (Html.BeginForm("Details", "Home"))
+                                                    {
+                                                        @Html.HiddenFor(i => item.ProductId)
+                                                        <button type="submit" class="btn btn-primary ml-2 mr-2">
+                                                            <i class="fa-solid fa-circle-info"></i> Sipariş Detayları
+                                                        </button>
+                                                    }
+                                                    @*@using (Html.BeginForm("Return", "Account"))
+                                                        {
+                                                            @Html.HiddenFor(i => Model.OrderId)
+                                                            <button type="submit" class="btn btn-danger ml-1 mr-1">
+                                                                <i class="fa-solid fa-trash-can"></i>İade Et
+                                                            </button>
+                                                        }*@
+                                                </div>
+                                            </div>
+                                        </div>
                                     </td>
                                 </tr>
                             }

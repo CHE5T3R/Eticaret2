@@ -1,4 +1,5 @@
 ﻿using Eticaret.Entities;
+using Eticaret2.Entities;
 using Eticaret2.Identity;
 using Eticaret2.Models;
 using Microsoft.AspNet.Identity;
@@ -165,6 +166,15 @@ namespace Eticaret2.Controllers
 
                 }).FirstOrDefault();
             return View(model);
+        }
+
+        public ActionResult Return(int id)
+        {
+            Order model = db.Orders.FirstOrDefault(i => i.Id == id);
+            db.Orders.Remove(model);
+            db.SaveChanges();
+            return RedirectToAction("Index");
+
         }
     }
 }

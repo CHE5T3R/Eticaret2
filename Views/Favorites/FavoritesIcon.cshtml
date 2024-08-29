@@ -1,11 +1,11 @@
-﻿
+﻿@model Eticaret2.Models.FavoriteViewModel
 
 
 <ul class="navbar-nav  my-2 my-lg-0">
     <li id="cart" class="nav-item">
         <a class="nav-link" href="/Favorites/Index">
             <i class="fa-solid fa-heart" aria-hidden="true"></i>
-            (0)
+            (@Model.Count)
         </a>
     </li>
 

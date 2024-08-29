@@ -154,6 +154,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\OrderController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
+    <Compile Include="Entities\Address.cs" />
     <Compile Include="Entities\Cart.cs" />
     <Compile Include="Entities\Comment.cs" />
     <Compile Include="Entities\EnumOrderState.cs" />
@@ -172,6 +173,7 @@
     <Compile Include="Identity\IdentityInitializer.cs" />
     <Compile Include="Models\AdminOrderModel.cs" />
     <Compile Include="Models\CartViewModel.cs" />
+    <Compile Include="Models\FavoriteViewModel.cs" />
     <Compile Include="Models\Login.cs" />
     <Compile Include="Models\OrderDetailsModel.cs" />
     <Compile Include="Models\ProductModel.cs" />

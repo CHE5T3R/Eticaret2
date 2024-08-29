@@ -29,7 +29,6 @@ namespace Eticaret2.Controllers
         {
             var product = db.Products.FirstOrDefault(i => i.Id == id);
             var carts = db.Carts.Where(i => i.UserName == User.Identity.Name);
-            //buradasın
 
 
             if (product != null)
@@ -114,7 +113,6 @@ namespace Eticaret2.Controllers
             summaryModel.Count = db.Carts.Where(i => i.UserName == User.Identity.Name).ToList().Count();
             return PartialView(summaryModel);
         }
-
         [Authorize]
         public ActionResult Checkout()
         {
@@ -143,7 +141,7 @@ namespace Eticaret2.Controllers
                         db.Carts.Remove(cart);
                         db.SaveChanges();
                     }
-                    return View("Completed");
+                    return RedirectToAction("Completed");
                 }
                 else
                 {
@@ -152,6 +150,14 @@ namespace Eticaret2.Controllers
             }
 
 
+            return View();
+        }
+
+        public ActionResult Completed()
+        {
+            var order = db.Orders.OrderByDescending(p => p.Id).FirstOrDefault();
+            ViewBag.OrderNumber = order.OrderNumber;
+            ViewBag.OrderId = order.Id;
             return View();
         }
 
