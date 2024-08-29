@@ -1,7 +1,14 @@
-﻿
+﻿@model IEnumerable<Eticaret2.Models.UserOrderModel>
 @{
     ViewBag.Title = "Completed";
 }
+<div class="container pb-5">
+    <div class="row">
+        <i class="fa-regular fa-circle-check"></i>
 
-<h2>Sipariş Tamamlandı :)</h2>
+        <h1>Siparişiniz Alındı:)</h1>
+        <label>Sipariş no:@Model) </label>
 
+
+    </div>
+</div>

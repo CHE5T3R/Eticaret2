@@ -21,7 +21,6 @@ namespace Eticaret.Entities
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderLine> OrderLines { get; set; }
         public DbSet<Cart> Carts { get; set; }
-        public DbSet<CartLine2> CartLine2 { get; set; }
 
     }
 

@@ -137,6 +137,11 @@
     <Content Include="upload\3.jpg" />
     <Content Include="upload\4.jpg" />
     <Content Include="upload\5.jpg" />
+    <Content Include="upload\beyazEşya.jpg" />
+    <Content Include="upload\camera.jpg" />
+    <Content Include="upload\computer.jpg" />
+    <Content Include="upload\electronicDevices.jpg" />
+    <Content Include="upload\phone.jpg" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -166,13 +171,13 @@
     <Compile Include="Identity\IdentityDataContext.cs" />
     <Compile Include="Identity\IdentityInitializer.cs" />
     <Compile Include="Models\AdminOrderModel.cs" />
-    <Compile Include="Models\CartModel.cs" />
     <Compile Include="Models\CartViewModel.cs" />
     <Compile Include="Models\Login.cs" />
     <Compile Include="Models\OrderDetailsModel.cs" />
     <Compile Include="Models\ProductModel.cs" />
     <Compile Include="Models\Register.cs" />
     <Compile Include="Models\ShippingDetails.cs" />
+    <Compile Include="Models\SummaryViewModel.cs" />
     <Compile Include="Models\UserOrderModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
