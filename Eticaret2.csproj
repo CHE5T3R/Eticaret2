@@ -140,6 +140,7 @@
     <Content Include="upload\beyazEşya.jpg" />
     <Content Include="upload\camera.jpg" />
     <Content Include="upload\computer.jpg" />
+    <Content Include="upload\default.jpg" />
     <Content Include="upload\electronicDevices.jpg" />
     <Content Include="upload\phone.jpg" />
     <Content Include="Web.config" />
@@ -171,9 +172,23 @@
     <Compile Include="Identity\ApplicationUser.cs" />
     <Compile Include="Identity\IdentityDataContext.cs" />
     <Compile Include="Identity\IdentityInitializer.cs" />
+    <Compile Include="Migrations\202408291040035_InitialCreate.cs" />
+    <Compile Include="Migrations\202408291040035_InitialCreate.Designer.cs">
+      <DependentUpon>202408291040035_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202408291343276_first.cs" />
+    <Compile Include="Migrations\202408291343276_first.Designer.cs">
+      <DependentUpon>202408291343276_first.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202408291346475_Address and Comment.cs" />
+    <Compile Include="Migrations\202408291346475_Address and Comment.Designer.cs">
+      <DependentUpon>202408291346475_Address and Comment.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AdminOrderModel.cs" />
     <Compile Include="Models\CartViewModel.cs" />
     <Compile Include="Models\FavoriteViewModel.cs" />
+    <Compile Include="Models\HomeDetailsViewModel.cs" />
     <Compile Include="Models\Login.cs" />
     <Compile Include="Models\OrderDetailsModel.cs" />
     <Compile Include="Models\ProductModel.cs" />
@@ -226,6 +241,17 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\202408291040035_InitialCreate.resx">
+      <DependentUpon>202408291040035_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202408291343276_first.resx">
+      <DependentUpon>202408291343276_first.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202408291346475_Address and Comment.resx">
+      <DependentUpon>202408291346475_Address and Comment.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

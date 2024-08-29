@@ -1,5 +1,5 @@
-﻿@using Eticaret.Entities
-@model Product
+﻿@using Eticaret2.Models
+@model HomeDetailsViewModel
 @{
     ViewBag.Title = "Details";
 }
@@ -7,29 +7,29 @@
 <div id="product-details" class="container pb-5">
     <div class="row">
         <div class="col-md-6">
-            <img src="~/upload/@Model.Image" class="img.fluid rounded w-100">
+            <img src="~/upload/@Model.Product.Image" class="img.fluid rounded w-100">
         </div>
         <div class="col-md-6">
             <div class="row">
                 <div class="col-md-12">
-                    <h1>@Model.Name</h1>
+                    <h1>@Model.Product.Name</h1>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-12">
-                    @if (Model.IsApproved)
+                    @if (Model.Product.IsApproved)
                     {
                         <span class="badge badge-success">In Stock</span>
                     }
                     else
                     {<span class="badge badge-danger">Stock out</span>}
-                    <span class="product-number">#@Model.Id</span>
+                    <span class="product-number">#@Model.Product.Id</span>
                 </div>
             </div>
             <div class="row mt-2">
                 <div class="col-md-12">
                     <div id="description">
-                        @Model.Description
+                        @Model.Product.Description
                     </div>
                 </div>
             </div>
@@ -42,13 +42,13 @@
                     <i class="fa fa-star-half-full" aria-hidden="true"></i>
                     <span class="badge badge-success">53</span>
                 </div>
-                <div id="write-rewiew" class="col-md-4 ml-1">
-                    <a href="#">Write a rewiew</a>
-                </div>
+                @*<div id="write-rewiew" class="col-md-4 ml-1">
+                        <a href="#">Write a rewiew</a>
+                    </div>*@
             </div>
             <div class="row mt-3">
                 <div class="col-md-12">
-                    <h4 id="product-price">@Model.Price.ToString("c")</h4>
+                    <h4 id="product-price">@Model.Product.Price.ToString("c")</h4>
                 </div>
             </div>
             <div class="row mt-2">
@@ -56,14 +56,14 @@
                     <div class="row">
                         @using (Html.BeginForm("AddToCart", "Cart"))
                         {
-                            @Html.HiddenFor(i => i.Id)
+                            @Html.HiddenFor(i => i.Product.Id)
                             <button type="submit" class="btn btn-success">
                                 <i class="fa fa-cart-plus"></i>Sepete Ekle
                             </button>
                         }
                         @using (Html.BeginForm("AddToFavorite", "Favorites"))
                         {
-                            @Html.HiddenFor(i => i.Id)
+                            @Html.HiddenFor(i => i.Product.Id)
                             <button type="submit" class="btn btn-success ml-2">
                                 <i class="fa-solid fa-heart"></i>Favorilere Ekle
                             </button>
@@ -73,9 +73,8 @@
             </div>
         </div>
     </div>
-    <div class="row mt-3">
-        <div class="col-md-12">
-            <div class="bd-example bd-example-tabs">
+    <div class="row mt-3 pb-1">
+        @*<div class="bd-example bd-example-tabs">
                 <ul class="nav nav-tabs mb-3" id="pills-tab" role="tablist">
                     <li class="nav-item" role="presentation">
                         <button class="nav-link active" id="pills-description-tab" data-toggle="pill" data-target="#pills-description" type="button" role="tab" aria-controls="pills-description" aria-selected="true">Description</button>
@@ -98,7 +97,27 @@
                         <p>Placeholder content for the tab panel. This one relates to the contact tab. Her love is like a drug. All my girls vintage Chanel baby. Got a motel and built a fort out of sheets. 'Cause she's the muse and the artist. (This is how we do) So you wanna play with magic. So just be sure before you give it all to me. I'm walking, I'm walking on air (tonight). Skip the talk, heard it all, time to walk the walk. Catch her if you can. Stinging like a bee I earned my stripes.</p>
                     </div>
                 </div>
-            </div>
+            </div>*@
+        <div class="col-md-11">
+            <input type="text" class="form-control" placeholder="Muhteşem bir ürün:)" />
         </div>
+        <div class="col-md-1">
+            <form action="~/Home/Details"><button type="submit" class="btn btn-success">Yorum yap</button></form>
+        </div>
+    </div>
+    <div class="container pb-5">
+        @if (Model.Comments.Count() != 0)
+        {
+            foreach (var item in Model.Comments)
+            {<div class="row">
+                    <div class="col-md-3">
+                        <label>@item.UserName : </label>
+                    </div>
+                    <div class="col-md-9">
+                        <textarea>@item.Comments</textarea>
+                    </div>
+                </div>
+            }
+        }
     </div>
 </div>

@@ -1,20 +1,22 @@
 ﻿using Eticaret.Entities;
 using Eticaret.Models;
+using Eticaret2.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using static System.Collections.Specialized.BitVector32;
 
 namespace Eticaret.Controllers
 {
     public class HomeController : Controller
     {
-        DataContext context = new DataContext();
+        DataContext db = new DataContext();
         // GET: Home
         public ActionResult Index()
         {
-            var items = context.Products
+            var items = db.Products
                 .Where(i => i.IsHome && i.IsApproved)
                 .Select(i => new ProductModel()
                 {
@@ -32,11 +34,17 @@ namespace Eticaret.Controllers
         }
         public ActionResult Details(int id)
         {
-            return View(context.Products.Where(i => i.Id == id).FirstOrDefault());
+            var model = new HomeDetailsViewModel
+            {
+                Product = db.Products.FirstOrDefault(x => x.Id == id),
+                Comments = db.Comments.ToList()
+            };
+
+            return View(model);
         }
         public ActionResult List(int?id)
         {
-            var items = context.Products
+            var items = db.Products
                 .Where(i => i.IsApproved)
                 .Select(i => new ProductModel()
                 {
@@ -45,7 +53,7 @@ namespace Eticaret.Controllers
                     Description = i.Description.Length > 50 ? i.Description.Substring(0, 47) + "..." : i.Description,
                     Price = i.Price,
                     Stock = i.Stock,
-                    Image = i.Image ?? "1.jpg",
+                    Image = i.Image ?? "default.jpg",
                     CategoryId = i.CategoryId
                 }).AsQueryable();
             if (id != null)
@@ -57,7 +65,11 @@ namespace Eticaret.Controllers
         }
         public PartialViewResult GetCategories()
         {
-            return PartialView(context.Categories.ToList());
+            return PartialView(db.Categories.ToList());
+        }
+        public ActionResult Comment()
+        {
+            return RedirectToAction("Details");
         }
     }
 }
