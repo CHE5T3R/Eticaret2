@@ -184,6 +184,10 @@
     <Compile Include="Migrations\202408291346475_Address and Comment.Designer.cs">
       <DependentUpon>202408291346475_Address and Comment.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202409022053430_comment.cs" />
+    <Compile Include="Migrations\202409022053430_comment.Designer.cs">
+      <DependentUpon>202409022053430_comment.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AdminOrderModel.cs" />
     <Compile Include="Models\CartViewModel.cs" />
@@ -251,6 +255,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202408291346475_Address and Comment.resx">
       <DependentUpon>202408291346475_Address and Comment.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202409022053430_comment.resx">
+      <DependentUpon>202409022053430_comment.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

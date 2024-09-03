@@ -37,7 +37,7 @@ namespace Eticaret.Controllers
             var model = new HomeDetailsViewModel
             {
                 Product = db.Products.FirstOrDefault(x => x.Id == id),
-                Comments = db.Comments.ToList()
+                Commentlist = db.Comments.ToList()
             };
 
             return View(model);
@@ -67,8 +67,9 @@ namespace Eticaret.Controllers
         {
             return PartialView(db.Categories.ToList());
         }
-        public ActionResult Comment()
+        public ActionResult AddComment(int id)
         {
+
             return RedirectToAction("Details");
         }
     }

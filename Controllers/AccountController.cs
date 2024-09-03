@@ -7,6 +7,7 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Owin.Security;
 using System;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Web;
 using System.Web.Mvc;
 
@@ -32,15 +33,15 @@ namespace Eticaret2.Controllers
         {
             var username = User.Identity.Name;
             var orders = db.Orders
-                .Where(i=>i.UserName == username)
-                .Select(i=>new UserOrderModel()
+                .Where(i => i.UserName == username)
+                .Select(i => new UserOrderModel()
                 {
                     Id = i.Id,
                     OrderNumber = i.OrderNumber,
                     OrderDate = i.OrderDate,
                     Total = i.Total,
                     OrderState = i.OrderState
-                }).OrderByDescending(i=>i.OrderDate).ToList();
+                }).OrderByDescending(i => i.OrderDate).ToList();
 
 
             return View(orders);
@@ -67,11 +68,17 @@ namespace Eticaret2.Controllers
                 user.Email = model.Email;
                 user.UserName = model.UserName;
 
+                int passwordControl = model.Password.Length;
+                if (passwordControl < 6)
+                {
+                    TempData["Başarısız"] = "Şifre 6 haneden küçük olamaz";
+                    return View(model);
+                }
                 var result = UserManager.Create(user, model.Password);
 
                 if (result.Succeeded)
                 {
-                    //kullanıcı oluştu ve kullanıcıyı bir role atayabilirsiniz.
+                    //kullanıcı oluştu ve kullanıcıyı bir role atayabilirsin.
                     if (RoleManager.RoleExists("user"))
                     {
                         UserManager.AddToRole(user.Id, "user");
@@ -80,7 +87,7 @@ namespace Eticaret2.Controllers
                 }
                 else
                 {
-                    ModelState.AddModelError("RegisterUserError", "Kullanıcı  oluşturma hatası.");
+                    TempData["Başarısız"] = "Kayıt olma başarısız";
                 }
 
 
@@ -100,31 +107,31 @@ namespace Eticaret2.Controllers
         {
             if (ModelState.IsValid)
             {
-                //Login işlemleri
-                var user = UserManager.Find(model.UserName, model.Password);
-
-                if (user != null)
-                {
-                    // Varolan kullanıcıyı sisteme dahil et.
-                    // ApplicationCookie oluşturup sisteme bırak.
-
-                    var authManager = HttpContext.GetOwinContext().Authentication;
-                    var identityclaims = UserManager.CreateIdentity(user, "ApplicationCookie");
-                    var authProperties = new AuthenticationProperties();
-                    authProperties.IsPersistent = model.RememberMe;
-                    authManager.SignIn(authProperties, identityclaims);
-
-                    if (!String.IsNullOrEmpty(ReturnUrl))
+                    //Login işlemleri
+                    var user = UserManager.Find(model.UserName, model.Password);
+                    if (user != null)
                     {
-                        return Redirect(ReturnUrl);
-                    }
+                        // Varolan kullanıcıyı sisteme dahil et.
+                        // ApplicationCookie oluşturup sisteme bırak.
 
-                    return RedirectToAction("Index", "Home");
-                }
-                else
-                {
-                    ModelState.AddModelError("LoginUserError", "Böyle bir kullanıcı yok.");
-                }
+                        var authManager = HttpContext.GetOwinContext().Authentication;
+                        var identityclaims = UserManager.CreateIdentity(user, "ApplicationCookie");
+                        var authProperties = new AuthenticationProperties();
+                        authProperties.IsPersistent = model.RememberMe;
+                        authManager.SignIn(authProperties, identityclaims);
+
+                        if (!String.IsNullOrEmpty(ReturnUrl))
+                        {
+                            return Redirect(ReturnUrl);
+                        }
+
+                        return RedirectToAction("Index", "Home");
+                    }
+                    else
+                    {
+                        TempData["Başarısız"] = "Kullanıcı adı veya şifre hatalı";
+                        ModelState.AddModelError("LoginUserError", "Böyle bir kullanıcı yok.");
+                    }
             }
 
             return View(model);
@@ -142,7 +149,7 @@ namespace Eticaret2.Controllers
         public ActionResult Details(int id)
         {
             var model = db.Orders.Where(i => i.Id == id)
-                .Select(i=> new OrderDetailsModel()
+                .Select(i => new OrderDetailsModel()
                 {
                     OrderId = i.Id,
                     OrderNumber = i.OrderNumber,

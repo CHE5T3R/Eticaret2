@@ -10,6 +10,6 @@ namespace Eticaret2.Models
     public class HomeDetailsViewModel
     {
         public Product Product { get; set; }
-        public List<Comment> Comments { get; set; }
+        public List<Comment> Commentlist { get; set; }
     }
 }

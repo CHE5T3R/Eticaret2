@@ -56,6 +56,7 @@ namespace Eticaret2.Controllers
 
             return RedirectToAction("Index");
         }
+
         public ActionResult DecreaseFromCart(int id)
         {
             var product = db.Products.FirstOrDefault(i => i.Id == id);
@@ -107,21 +108,29 @@ namespace Eticaret2.Controllers
 
             return RedirectToAction("Index");
         }
+
         public PartialViewResult Summary()
         {
             var summaryModel = new SummaryViewModel();
             summaryModel.Count = db.Carts.Where(i => i.UserName == User.Identity.Name).ToList().Count();
             return PartialView(summaryModel);
         }
-        [Authorize]
+
         public ActionResult Checkout()
         {
             return View(new ShippingDetails());
         }
+
         [HttpPost]
         public ActionResult Checkout(ShippingDetails shippingdetails)
         {
-            var carts = db.Carts.Where(i => i.UserName == User.Identity.Name);
+            var carts = db.Carts.Where(i=>i.UserName == User.Identity.Name);
+            
+            if (User.Identity.Name == null || User.Identity.Name == "")
+            {
+                carts = db.Carts.Where(i => i.UserName == shippingdetails.UserName);
+            }
+                
             var cartList = carts.ToList();
             if (carts.Count() == 0)
             {

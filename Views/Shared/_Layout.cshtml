@@ -22,8 +22,6 @@
             bottom: 0;
             left: 0;
         }
-
-
     </style>
 </head>
 <body>
@@ -45,25 +43,34 @@
                     </li>
 
                 </ul>
-                @Html.Action("FavoritesIcon","Favorites")
+                @Html.Action("FavoritesIcon", "Favorites")
                 @Html.Action("Summary", "Cart")
                 @Html.Partial("_LoginPartial")
             </div>
         </div>
     </nav>
-
+    <div class="container">
+        <main role="main" class="container pb-3 pb-3">
+            @if (TempData["Başarısız"] != null)
+            {
+                <div class="alert alert-danger">
+                    @TempData["Başarısız"]
+                </div>
+            }
+        </main>
+    </div>
 
     @RenderBody()
 
 
 
-<footer class="footer">
-    <div class="container">
-        
-        <a href="/Home" style="color:#000000;">User Page</a> |
-        <a href="/Order" style="color:#000000;">Admin Page</a>
-    </div>
-</footer>
+    <footer class="footer">
+        <div class="container">
+
+            <a href="/Home" style="color:#000000;">User Page</a> |
+            <a href="/Order" style="color:#000000;">Admin Page</a>
+        </div>
+    </footer>
 
 
     <!-- Optional JavaScript -->

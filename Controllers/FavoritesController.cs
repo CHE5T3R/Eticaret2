@@ -22,7 +22,7 @@ namespace Eticaret2.Controllers
 
             return View(favorite.ToList());
         }
-
+        [Authorize]
         public ActionResult AddToFavorite(int id)
         {
             var product = db.Products.FirstOrDefault(i => i.Id == id);
