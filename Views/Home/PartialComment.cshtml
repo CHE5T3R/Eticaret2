@@ -1,0 +1,35 @@
+﻿@model Eticaret2.Models.HomeDetailsViewModel
+
+
+@using (Html.BeginForm("AddComment", "Home", FormMethod.Post))
+{
+    <div class="col-md-11">
+        @Html.EditorFor(i => i.Comment.Comments, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.HiddenFor(i=>i.Product)
+        @Html.HiddenFor(i=>i.Comment)
+
+    </div>
+    <div class="col-md-1">
+        <button type="submit" class="btn btn-success">
+            <i class=""></i>Yorum yap
+        </button>
+
+    </div>
+    }
+
+<div class="container pb-5">
+    @if (Model.Commentlist.Count() != 0)
+    {
+        foreach (var item in Model.Commentlist)
+        {
+            <div class="row">
+                <div class="col-md-3">
+                    <label>@item.UserName : </label>
+                </div>
+                <div class="col-md-9">
+                    <textarea>@item.Comments</textarea>
+                </div>
+            </div>
+        }
+    }
+</div>

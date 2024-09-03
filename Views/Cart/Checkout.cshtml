@@ -1,0 +1,66 @@
+﻿@model Eticaret2.Models.ShippingDetails
+@{
+    ViewBag.Title = "Checkout";
+}
+
+<style>
+</style>
+
+<div class="container pb-5">
+    <div class="row">
+        <div class="col-md-12">
+            <h2>Sipariş Bilgileriniz</h2>
+            <hr />
+            @using (Html.BeginForm())
+            {
+                @Html.ValidationSummary()
+
+
+                <div class="form-group col-md-6">
+                    @if (User.Identity.Name != "" && User.Identity.Name != null)
+                    {
+                        <label>Kullanıcı Adı :</label>
+                        <span style="color:blue;font-weight:bold;font-style:italic">@User.Identity.Name</span>
+                    }
+                    else
+                    {
+                        <label>Kullanıcı Adı :</label>
+                        @Html.TextBoxFor(x => x.UserName, new { @class = "form-control" })
+                    }
+                </div>
+                <div class="form-group col-md-6">
+                    <label>Adres Başlığı</label>
+                    @Html.TextBoxFor(x => x.AdresBasligi, new { @class = "form-control" })
+                </div>
+                <div class="form-group col-md-6">
+                    <label>Adres</label>
+                    @Html.TextBoxFor(x => x.Adres, new { @class = "form-control" })
+                </div>
+                <div class="form-group col-md-6">
+                    <label>Şehir</label>
+                    @Html.TextBoxFor(x => x.Sehir, new { @class = "form-control" })
+                </div>
+                <div class="form-group col-md-6">
+                    <label>Semt</label>
+                    @Html.TextBoxFor(x => x.Semt, new { @class = "form-control" })
+                </div>
+                <div class="form-group col-md-6">
+                    <label>Mahalle</label>
+                    @Html.TextBoxFor(x => x.Mahalle, new { @class = "form-control" })
+                </div>
+                <div class="form-group col-md-6">
+                    <label>Posta Kodu</label>
+                    @Html.TextBoxFor(x => x.PostaKodu, new { @class = "form-control" })
+                </div>
+                <div class="col-sm-6 pb-5">
+                    <button type="submit" class="btn btn-success">Submit</button>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+

@@ -1,10 +1,10 @@
-﻿using Eticaret.Models.Entities;
+﻿using Eticaret.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace Eticaret.Models.ViewModel
+namespace Eticaret.Models
 {
     public class ProductModel
     {

@@ -1,31 +1,30 @@
-﻿@using Eticaret.Models.ViewModel;
+﻿@using Eticaret.Models;
 @model IEnumerable<ProductModel>
 
-<div class="row">
+<div class="row" style="height:100%">
 
     @foreach (var item in Model)
     {
         <div class="col-md-4 mb-4">
             <div class="card">
-                <img class="card-img-top" src="~/upload/@item.Image" alt="@item.Name">
+                <img class="card-img-top" src="~/upload/@item.Image" style="weight:100%; height:300px; object-fit" alt="@item.Name">
                 <div class="card-body">
-                    <h4 class="card-title">
+                    <h4 class="card-title" style="weight:100%; height:50%; object-fit">
                         <a href="/Home/Details/@item.Id">@item.Name</a>
                     </h4>
-                    <p class="card-text description" pt-2>
-                    @item.Description
+                    <p class="card-text description" style="weight:100%; height:50%; object-fit" mb-2>
+                        @item.Description
                     </p>
                 </div>
-                <div class="card-footer">
-                    <small class="text-muted product-price">
-                        @item.Price
-                        <i class="fa fa-turkish-lira"></i>
-                    </small>
-                    <a href="/Home/Details/@item.Id" class="btn btn-default btn-sm float-right">
-                        <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-                        ürünü incele
-                    </a>
-                </div>
+            </div>
+            <div class="card-footer">
+                <small class="text-muted product-price">
+                    @item.Price.ToString("c")
+                </small>
+                <a href="/Home/Details/@item.Id" class="btn btn-default btn-sm float-right">
+                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                    ürünü incele
+                </a>
             </div>
         </div>
     }

@@ -1,0 +1,22 @@
+﻿@model Eticaret2.Entities.Order
+@{
+    ViewBag.Title = "Completed";
+}
+<div class="container pb-5">
+    <div class="row" style="text-align:center;">
+        <div class="container">
+            <i class="fa-regular fa-circle-check fa-10x " style="text-align: center; color:#4cff00;"></i>
+        </div>
+        <div class="container">
+            <h1>Siparişiniz Alındı:)</h1>
+        </div>
+        <div class="container">
+            <label>Sipariş no : <strong>@ViewBag.OrderNumber</strong></label>
+        </div>
+        <div class="container">
+            <form>
+                <a href="@Url.Action("Details", "Account", new { id = ViewBag.OrderId})">Sipariş Bilgilerini Gör</a>
+            </form>
+        </div>
+    </div>
+</div>

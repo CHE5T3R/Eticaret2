@@ -1,4 +1,4 @@
-﻿@using Eticaret.Models.ViewModel
+﻿@using Eticaret.Models
 @model IEnumerable<ProductModel>
 @{
     ViewBag.Title = "List";
@@ -8,23 +8,23 @@
         <div class="col-md-3">
             @Html.Action("GetCategories", "Home")
         </div>
-        <div class="col-md-9">
+        <div class="col-md-9 pb-5">
 
             @if (Model.Count() == 0)
             {
                 <div class="alert alert-warning" role="alert">
                     <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
-                    Bu kategoride bür ürün bulunamadı
+                    Bu kategoride bir ürün bulunamadı
                 </div>
             }
             else
             {
-        <div class="alert alert-secondary" role="alert">
-            <i class="fa fa-check-square" aria-hidden="true"></i>
-            <strong>@Model.Count()</strong> adet ürün bulundu.
-        </div>
+                <div class="alert alert-secondary" role="alert">
+                    <i class="fa fa-check-square" aria-hidden="true"></i>
+                    <strong>@Model.Count()</strong> adet ürün bulundu.
+                </div>
             }
-            
+
             @Html.Partial("_ProductList", Model)
         </div>
     </div>
